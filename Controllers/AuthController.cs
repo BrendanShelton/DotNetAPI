@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using DotnetAPI.Data;
 using DotnetAPI.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -12,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace DotnetAPI.Controllers
 {
+    [Authorize]
     public class AuthController : ControllerBase
     {
         private readonly DataContextDapper _dapper;
@@ -22,6 +24,7 @@ namespace DotnetAPI.Controllers
             _config = config;
         }
 
+        [AllowAnonymous]
         [HttpPost("Register")]
         public IActionResult Register(UserForRegistrationDto userForRegistration)
         {
@@ -83,6 +86,7 @@ namespace DotnetAPI.Controllers
             throw new Exception("Passwords do not match");
         }
 
+        [AllowAnonymous]
         [HttpPost("Login")]
         public IActionResult Login(UserForLoginDto UserForLogin)
         {
@@ -113,6 +117,15 @@ namespace DotnetAPI.Controllers
             });
         }
 
+        [HttpGet("RefreshToken")]
+        public string RefreshToken()
+        {
+            string userIdSql = @"SELECT UserId FROM TutorialAppSchema.Users WHERE UserId = '" + 
+            User.FindFirst("UserId")?.Value + "'";
+
+            int userId = _dapper.LoadDataSingle<int>(userIdSql);
+            return CreateToken(userId);
+        }
         private byte[] GetPasswordHash(string password, byte[] passwordSalt)
         {
             string passwordSaltPlusString = _config.GetSection("AppSettings:PasswordKey").Value + 

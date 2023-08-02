@@ -71,3 +71,4 @@ C:\Users\brend\Desktop\bootcamp\NewProjects\dotnet-course-code\DotnetAPI\bin\Deb
 C:\Users\brend\Desktop\bootcamp\NewProjects\dotnet-course-code\DotnetAPI\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\brend\Desktop\bootcamp\NewProjects\dotnet-course-code\DotnetAPI\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\brend\Desktop\bootcamp\NewProjects\dotnet-course-code\DotnetAPI\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\brend\Desktop\bootcamp\NewProjects\dotnet-course-code\DotnetAPI\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
